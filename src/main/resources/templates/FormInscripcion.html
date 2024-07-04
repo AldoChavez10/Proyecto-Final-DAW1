@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Inscripción</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url('https://pictures.smartfit.com.br/10786/big/Open_Plaza_Huancayo.jpeg?1664485240');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Formulario de Inscripción</h2>
+        <form action="/saveInscripcion" th:object="${inscripcion}" method="post">
+            <div class="mb-3">
+                <label for="cliente" class="form-label">Cliente</label>
+                <select class="form-select" id="cliente" th:field="*{cliente}">
+                    <option value="">Selecciona un cliente</option>
+                    <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre + ' ' + cliente.apellido}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="membresia" class="form-label">Membresía</label>
+                <select class="form-select" id="membresia" th:field="*{membresia}">
+                    <option value="">Selecciona una membresía</option>
+                    <option th:each="membresia : ${membresias}" th:value="${membresia.id}" th:text="${membresia.tipo}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="fechaInscripcion" class="form-label">Fecha de Inscripción</label>
+                <input type="date" class="form-control" id="fechaInscripcion" th:field="*{fechaInscripcion}">
+            </div>
+            <div class="mb-3">
+                <a href="/listarInscripciones" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
